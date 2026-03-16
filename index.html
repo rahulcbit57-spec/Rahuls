@@ -1,0 +1,152 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>For Vaishnavi ❤️</title>
+
+<style>
+
+body{
+margin:0;
+height:100vh;
+display:flex;
+justify-content:center;
+align-items:center;
+background:linear-gradient(135deg,#ff4e50,#fc6076,#ff758c);
+font-family:Arial;
+overflow:hidden;
+color:white;
+}
+
+/* floating hearts */
+
+.heart{
+position:absolute;
+bottom:-10px;
+font-size:20px;
+animation:float 7s linear infinite;
+opacity:0.9;
+}
+
+@keyframes float{
+0%{
+transform:translateY(0) scale(1);
+opacity:1;
+}
+100%{
+transform:translateY(-100vh) scale(1.8);
+opacity:0;
+}
+}
+
+.container{
+background:rgba(0,0,0,0.45);
+padding:40px;
+border-radius:20px;
+text-align:center;
+width:80%;
+max-width:520px;
+box-shadow:0 0 25px rgba(0,0,0,0.5);
+}
+
+h1{
+font-size:36px;
+color:#ffd1dc;
+}
+
+button{
+margin-top:20px;
+padding:12px 28px;
+font-size:18px;
+border:none;
+border-radius:10px;
+background:#ff2e63;
+color:white;
+cursor:pointer;
+}
+
+button:hover{
+background:#ff004c;
+}
+
+#message{
+margin-top:20px;
+font-size:18px;
+line-height:1.7;
+min-height:120px;
+}
+
+</style>
+
+</head>
+
+<body>
+
+<div class="container">
+
+<h1>Good Luck Vaishnavi 💖</h1>
+
+<p>From Rahul</p>
+
+<button onclick="startMessage()">Open My Heart</button>
+
+<div id="message"></div>
+
+</div>
+
+<script>
+
+/* typing message */
+
+const text = `Dear Vaishnavi ❤️
+
+Before your ANATOMY PAPER II exam,
+I just wanted to remind you that you are incredibly smart, hardworking, and strong.
+
+I know you will do amazing.
+
+Believe in yourself the same way I believe in you.
+
+No matter what happens,
+I will always be proud of you.
+
+All the best for your exam.
+
+— Rahul 💖`;
+
+let i=0;
+
+function startMessage(){
+let speed=40;
+function typing(){
+if(i<text.length){
+document.getElementById("message").innerHTML += text.charAt(i);
+i++;
+setTimeout(typing,speed);
+}
+}
+typing();
+}
+
+/* floating hearts */
+
+function createHeart(){
+const heart=document.createElement("div");
+heart.className="heart";
+heart.innerHTML="💖";
+heart.style.left=Math.random()*100+"vw";
+heart.style.animationDuration=(Math.random()*3+4)+"s";
+
+document.body.appendChild(heart);
+
+setTimeout(()=>{
+heart.remove();
+},7000);
+}
+
+setInterval(createHeart,300);
+
+</script>
+
+</body>
+</html>
