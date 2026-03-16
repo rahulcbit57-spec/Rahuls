@@ -1,4 +1,4 @@
- <!DOCTYPE html>
+<!DOCTYPE html>
 <html lang="en">
 <head>
 <meta charset="UTF-8">
@@ -12,51 +12,78 @@ height:100vh;
 display:flex;
 justify-content:center;
 align-items:center;
-background:linear-gradient(135deg,#ff4e50,#fc6076,#ff758c);
+background:linear-gradient(#0f2027,#203a43,#2c5364);
 font-family:Arial;
-overflow:hidden;
 color:white;
+overflow:hidden;
+}
+
+/* moon */
+
+.moon{
+position:absolute;
+top:70px;
+right:120px;
+width:130px;
+height:130px;
+background:white;
+border-radius:50%;
+box-shadow:0 0 60px white;
+}
+
+/* stars */
+
+.star{
+position:absolute;
+width:3px;
+height:3px;
+background:white;
+border-radius:50%;
+animation:twinkle 2s infinite alternate;
+}
+
+@keyframes twinkle{
+from{opacity:0.2;}
+to{opacity:1;}
 }
 
 /* floating hearts */
 
 .heart{
 position:absolute;
-bottom:-10px;
 font-size:20px;
-animation:float 7s linear infinite;
-opacity:0.9;
+animation:explode 2s forwards;
 }
 
-@keyframes float{
+@keyframes explode{
 0%{
-transform:translateY(0) scale(1);
+transform:scale(0);
 opacity:1;
 }
 100%{
-transform:translateY(-100vh) scale(1.8);
+transform:translate(var(--x),var(--y)) scale(2);
 opacity:0;
 }
 }
 
+/* container */
+
 .container{
-background:rgba(0,0,0,0.45);
+background:rgba(0,0,0,0.5);
 padding:40px;
 border-radius:20px;
 text-align:center;
-width:80%;
 max-width:520px;
-box-shadow:0 0 25px rgba(0,0,0,0.5);
 }
 
 h1{
 font-size:36px;
-color:#ffd1dc;
+color:#ff9ecf;
 }
 
 button{
 margin-top:20px;
-padding:12px 28px;
+padding:12px 30px;
 font-size:18px;
 border:none;
 border-radius:10px;
@@ -65,15 +92,11 @@ color:white;
 cursor:pointer;
 }
 
-button:hover{
-background:#ff004c;
-}
-
 #message{
+display:none;
 margin-top:20px;
 font-size:18px;
 line-height:1.7;
-min-height:120px;
 }
 
 </style>
@@ -82,71 +105,91 @@ min-height:120px;
 
 <body>
 
+<div class="moon"></div>
+
 <div class="container">
 
-<h1>Good Luck Vaishnavi 💖</h1>
+<h1>Good Luck Vaishnavi 🌙❤️</h1>
 
 <p>From Rahul</p>
 
-<button onclick="startMessage()">Open My Heart</button>
+<button onclick="surprise()">Open My Heart</button>
 
-<div id="message"></div>
+<div id="message">
 
-</div>
+Dear Vaishnavi 🩵
 
-<script>
+Just like the moon shines in the night sky,
+I know you will shine in your **ANATOMY PAPER II**.
 
-/* typing message */
-
-const text = `Dear Vaishnavi ❤️
-
-Before your ANATOMY PAPER II exam,
-I just wanted to remind you that you are incredibly smart, hardworking, and strong.
-
-I know you will do amazing.
-
-Believe in yourself the same way I believe in you.
+Believe in yourself because you are amazing.
 
 No matter what happens,
 I will always be proud of you.
 
-All the best for your exam.
+All the best for your exam ✨
 
-— Rahul 💖`;
+— Rahul ❤️
 
-let i=0;
+</div>
 
-function startMessage(){
-let speed=40;
-function typing(){
-if(i<text.length){
-document.getElementById("message").innerHTML += text.charAt(i);
-i++;
-setTimeout(typing,speed);
+</div>
+
+<!-- romantic music -->
+<audio id="music" loop>
+<source src="https://cdn.pixabay.com/download/audio/2022/03/15/audio_8c1e6c9a0e.mp3?filename=romantic-background-112191.mp3" type="audio/mpeg">
+</audio>
+
+<script>
+
+/* create stars */
+
+for(let i=0;i<100;i++){
+let star=document.createElement("div");
+star.className="star";
+star.style.left=Math.random()*100+"vw";
+star.style.top=Math.random()*100+"vh";
+document.body.appendChild(star);
 }
-}
-typing();
-}
 
-/* floating hearts */
+/* heart explosion */
 
-function createHeart(){
-const heart=document.createElement("div");
+function explodeHearts(){
+for(let i=0;i<40;i++){
+let heart=document.createElement("div");
 heart.className="heart";
-heart.innerHTML="💖";
-heart.style.left=Math.random()*100+"vw";
-heart.style.animationDuration=(Math.random()*3+4)+"s";
+heart.innerHTML="🩵";
+
+let x=(Math.random()*400-200)+"px";
+let y=(Math.random()*400-200)+"px";
+
+heart.style.setProperty("--x",x);
+heart.style.setProperty("--y",y);
+
+heart.style.left="50%";
+heart.style.top="50%";
 
 document.body.appendChild(heart);
 
-setTimeout(()=>{
-heart.remove();
-},7000);
+setTimeout(()=>heart.remove(),2000);
+}
 }
 
-setInterval(createHeart,300);
+/* button click */
+
+function surprise(){
+
+document.getElementById("message").style.display="block";
+
+document.getElementById("music").play();
+
+explodeHearts();
+
+}
 
 </script>
 
 </body>
 </html>
+
+
